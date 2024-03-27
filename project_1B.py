@@ -1,5 +1,6 @@
 # Import libraries
 import numpy as np
+from scipy.stats import norm
 import math
 
 # Parameters
@@ -9,12 +10,14 @@ sigma = 0.25                                    # Constant volatility of the sto
 T = 0.25                                        # Time to maturity
 S0 = 10                                         # Current stock price
 
+
 # Function to calculate u and d for the binomial tree
 def calculated_u_d(sigma, T, N):
     dt = T / N
     u = math.exp(sigma * math.sqrt(dt))         # Compute u
     d = 1 / u                                   # Compute d
     return u, d
+
 
 # Function to calculate option price using binomial tree method
 def calculate_price_binomial_tree(N):
@@ -32,7 +35,18 @@ def calculate_price_binomial_tree(N):
     # Calculate option values at earlier time steps using backward recursion
     for j in range(N - 1, -1, -1):
         for i in range(j + 1):
-            option_value[i] = math.exp(-r * dt) * (p * option_value[i] + (1 - p) * option_value[i + 1]) # Calculate option value using the binomial tree method
+            option_value[i] = math.exp(-r * dt) * (p * option_value[i] + (1 - p) * option_value[i + 1])
     
+    # Return option value at time 0
     return option_value[0]
 
+
+# Function to calculate option price using Black-Scholes formula
+def calculate_price_black_scholes():
+    d1 = (math.log(S0 / K) + (r + sigma ** 2 / 2) * T) / (sigma * math.sqrt(T))
+    d2 = d1 - sigma * math.sqrt(T)
+    price = S0 * norm.cdf(d1) - K * math.exp(-r * T) * norm.cdf(d2) # Black-Scholes formula
+    return price
+
+# Calculate the option price using the Black-Scholes formula
+price_black_scholes = calculate_price_black_scholes()
