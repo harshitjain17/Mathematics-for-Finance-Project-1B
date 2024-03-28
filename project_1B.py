@@ -49,12 +49,12 @@ def calculate_price_black_scholes():
     price = S0 * norm.cdf(d1) - K * math.exp(-r * T) * norm.cdf(d2)     # Black-Scholes formula
     return price
 
-# Calculate the option price using the Black-Scholes formula
-price_black_scholes = calculate_price_black_scholes()
-
 
 if __name__ == "__main__":
     
+    # (b) Calculate the option price using the Black-Scholes formula
+    price_black_scholes = calculate_price_black_scholes()
+
     # (a) Calculate option prices using binomial tree method for number of time steps N = 10, 100, 1000, and 10000
     prices_binomial_tree = []
     errors = []
@@ -64,7 +64,7 @@ if __name__ == "__main__":
         error = abs(price - price_black_scholes)
         errors.append(error)
     
-    # (b) and (c) Print the table and Black-Scholes price
+    # (c) Print the table and Black-Scholes price
     print("Price using Black-Scholes: ", price_black_scholes)
     print("N\tBinomial Tree\t|E|")
     for i in range(len(prices_binomial_tree)):
