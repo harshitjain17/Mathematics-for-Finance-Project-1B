@@ -84,13 +84,13 @@ if __name__ == "__main__":
     # (d) Plot the least squares line on the plot with red color
     plt.plot(ln_N, slope*np.array(ln_N) + intercept, 'r')
 
-    # Print the equation of the least squares line
+    # (d) Print the equation of the least squares line
     print(f"The least squares line is: ln|E| = {slope:.4f} lnN + {intercept:.4f}")
     
-    # Calculate the convergence rate (-A) from the slope
+    # (e) Calculate the convergence rate (-A) from the slope
     convergence_rate = -slope
 
-    # Print the convergence rate
+    # (e) Print the convergence rate
     print(f"The convergence rate of the Binomial Tree method is: {convergence_rate:.4f}")
 
     # Display the plot
